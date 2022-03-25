@@ -48,6 +48,8 @@ class Suggestion {
         selection.get('anchorKey') === selection.get('focusKey')
       ) {
         let text = contentBlock.getText();
+        // console.log('text1')
+        // console.log(text)
         text = text.substr(
           0,
           selection.get('focusOffset') === text.length - 1
@@ -60,24 +62,45 @@ class Suggestion {
           index = 0;
           preText = trigger;
         }
+
+        if (text[text.length - 1] === ' ') {
+          index = -1;
+        }
+
+        // console.log('text2')
+        // console.log(text)
+        // console.log('preText')
+        // console.log(preText)
+        // console.log('separator')
+        // console.log(separator)
         if (index >= 0) {
-          const mentionText = text.substr(index + preText.length, text.length);
-          const suggestionPresent = getSuggestions().some(suggestion => {
-            if (suggestion.value) {
-              if (this.config.caseSensitive) {
-                return suggestion.value.indexOf(mentionText) >= 0;
-              }
-              return (
-                suggestion.value
-                  .toLowerCase()
-                  .indexOf(mentionText && mentionText.toLowerCase()) >= 0
-              );
-            }
-            return false;
-          });
-          if (suggestionPresent) {
-            callback(index === 0 ? 0 : index + 1, text.length);
-          }
+          // const mentionText = text.substr(index + preText.length, text.length);
+          // getSuggestions(mentionText).then((suggestions) => {
+          //   console.log('suggestions - findSuggestionEntities')
+          //   console.log(suggestions)
+          //   const suggestionPresent = suggestions.some(suggestion => {
+          //     if (suggestion.value) {
+          //       if (this.config.caseSensitive) {
+          //         return suggestion.value.indexOf(mentionText) >= 0;
+          //       }
+          //       return (
+          //         suggestion.value
+          //           .toLowerCase()
+          //           .indexOf(mentionText && mentionText.toLowerCase()) >= 0
+          //       );
+          //     }
+          //     return false;
+          //   });
+
+          //   console.log('suggestionPresent');
+          //   console.log(suggestionPresent);
+          //   console.log(index);
+          //   if (suggestionPresent) {
+          //     callback(index === 0 ? 0 : index + 1, text.length);
+          //   }
+          // })
+
+          callback(index === 0 ? 0 : index + 1, text.length);
         }
       }
     }
@@ -102,25 +125,26 @@ function getSuggestionComponent() {
       style: { left: 15 },
       activeOption: -1,
       showSuggestions: true,
+      filteredSuggestions: [],
     };
 
     componentDidMount() {
       const editorRect = config.getWrapperRef().getBoundingClientRect();
       const suggestionRect = this.suggestion.getBoundingClientRect();
-      const dropdownRect = this.dropdown.getBoundingClientRect();
+      // const dropdownRect = this.dropdown.getBoundingClientRect();
       let left;
       let right;
       let bottom;
       if (
         editorRect.width <
-        suggestionRect.left - editorRect.left + dropdownRect.width
+        suggestionRect.left - editorRect.left + 200
       ) {
         right = 15;
       } else {
         left = 15;
       }
-      if (editorRect.bottom < dropdownRect.bottom) {
-        bottom = 0;
+      if (editorRect.bottom) {
+        bottom = 20;
       }
       this.setState({
         // eslint-disable-line react/no-did-mount-set-state
@@ -153,14 +177,14 @@ function getSuggestionComponent() {
       const newState = {};
       if (event.key === 'ArrowDown') {
         event.preventDefault();
-        if (activeOption === this.filteredSuggestions.length - 1) {
+        if (activeOption === this.state.filteredSuggestions.length - 1) {
           newState.activeOption = 0;
         } else {
           newState.activeOption = activeOption + 1;
         }
       } else if (event.key === 'ArrowUp') {
         if (activeOption <= 0) {
-          newState.activeOption = this.filteredSuggestions.length - 1;
+          newState.activeOption = this.state.filteredSuggestions.length - 1;
         } else {
           newState.activeOption = activeOption - 1;
         }
@@ -200,33 +224,37 @@ function getSuggestionComponent() {
       });
     };
 
-    filteredSuggestions = [];
-
-    filterSuggestions = props => {
+    filterSuggestions = (props) => {
       const mentionText = props.children[0].props.text.substr(1);
-      const suggestions = config.getSuggestions();
-      this.filteredSuggestions =
-        suggestions &&
-        suggestions.filter(suggestion => {
-          if (!mentionText || mentionText.length === 0) {
-            return true;
-          }
-          if (config.caseSensitive) {
-            return suggestion.value.indexOf(mentionText) >= 0;
-          }
-          return (
-            suggestion.value
-              .toLowerCase()
-              .indexOf(mentionText && mentionText.toLowerCase()) >= 0
-          );
+      config.getSuggestions(mentionText).then((suggestions) => {
+        // console.log('suggestions - filterSuggestions')
+        // console.log(suggestions)
+        const filteredSuggestions =
+          suggestions &&
+          suggestions.filter(suggestion => {
+            if (!mentionText || mentionText.length === 0) {
+              return true;
+            }
+            if (config.caseSensitive) {
+              return suggestion.value.indexOf(mentionText) >= 0;
+            }
+            return (
+              suggestion.value
+                .toLowerCase()
+                .indexOf(mentionText && mentionText.toLowerCase()) >= 0
+            );
+          });
+        this.setState({
+          filteredSuggestions,
         });
+      });
     };
 
     addMention = () => {
       const { activeOption } = this.state;
       const editorState = config.getEditorState();
       const { onChange, separator, trigger } = config;
-      const selectedMention = this.filteredSuggestions[activeOption];
+      const selectedMention = this.state.filteredSuggestions[activeOption];
       if (selectedMention) {
         addMention(editorState, onChange, separator, trigger, selectedMention);
       }
@@ -236,6 +264,13 @@ function getSuggestionComponent() {
       const { children } = this.props;
       const { activeOption, showSuggestions } = this.state;
       const { dropdownClassName, optionClassName } = config;
+
+      // console.log('this.state.filteredSuggestions')
+      // console.log(this.state.filteredSuggestions)
+      // console.log(showSuggestions)
+      // console.log('children')
+      // console.log(children)
+
       return (
         <span
           className="rdw-suggestion-wrapper"
@@ -245,7 +280,7 @@ function getSuggestionComponent() {
           aria-label="rdw-suggestion-popup"
         >
           <span>{children}</span>
-          {showSuggestions && (
+          {showSuggestions && this.state.filteredSuggestions.length > 0 && (
             <span
               className={classNames(
                 'rdw-suggestion-dropdown',
@@ -254,9 +289,9 @@ function getSuggestionComponent() {
               contentEditable="false"
               suppressContentEditableWarning
               style={this.state.style}
-              ref={this.setDropdownReference}
+              // ref={this.setDropdownReference}
             >
-              {this.filteredSuggestions.map((suggestion, index) => (
+              {this.state.filteredSuggestions.map((suggestion, index) => (
                 <span
                   key={index}
                   spellCheck={false}

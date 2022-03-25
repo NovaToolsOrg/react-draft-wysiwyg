@@ -10,6 +10,7 @@
   "author": "Jyoti Puri",
   "devDependencies": {
     "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "@babel/register": "^7.7.4",
@@ -69,7 +70,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build:webpack": "cross-env NODE_ENV=production webpack  --mode production --config config/webpack.config.js",
+    "build:webpack": "cross-env NODE_ENV=production webpack --mode production --config config/webpack.config.js",
     "build": "npm run clean && npm run build:webpack",
     "test": "cross-env BABEL_ENV=test mocha --require config/test-compiler.js config/test-setup.js src/**/*Test.js",
     "lint": "eslint src",

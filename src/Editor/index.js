@@ -20,8 +20,8 @@ import {
 import classNames from 'classnames';
 import ModalHandler from '../event-handler/modals';
 import FocusHandler from '../event-handler/focus';
-import KeyDownHandler from '../event-handler/keyDown';
-import SuggestionHandler from '../event-handler/suggestions';
+// import KeyDownHandler from '../event-handler/keyDown';
+// import SuggestionHandler from '../event-handler/suggestions';
 import blockStyleFn from '../utils/BlockStyle';
 import { mergeRecursive } from '../utils/toolbar';
 import { hasProperty, filter } from '../utils/common';
@@ -115,6 +115,24 @@ class WysiwygEditor extends Component {
     this.customStyleMap = this.getStyleMap(this.props);
   }
 
+  keyDownCallBacks = [];
+
+  keyDownHandler = {
+    onKeyDown: (event) => {
+      this.keyDownCallBacks.forEach((callBack) => {
+        callBack(event);
+      });
+    },
+
+    registerCallBack: (callBack) => {
+      this.keyDownCallBacks.push(callBack);
+    },
+
+    deregisterCallBack: (callBack) => {
+      this.keyDownCallBacks = this.keyDownCallBacks.filter(cb => cb !== callBack);
+    },
+  };
+
   onEditorBlur = () => {
     this.setState({
       editorFocused: false,
@@ -153,7 +171,7 @@ class WysiwygEditor extends Component {
       return null;
     }
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      if (SuggestionHandler.isOpen()) {
+      if (this.suggestionHandler.isOpen()) {
         event.preventDefault();
       }
     }
@@ -207,7 +225,15 @@ class WysiwygEditor extends Component {
 
   getCompositeDecorator = toolbar => {
     const decorators = [
-      ...this.props.customDecorators,
+      ...this.props.customDecorators({
+        getWrapperRef: this.getWrapperRef,
+        modalHandler: this.modalHandler,
+        onChange: this.onChange,
+        getEditorState: this.getEditorState,
+        keyDownHandler: this.keyDownHandler,
+        keyDownCallBacks: this.keyDownCallBacks,
+        suggestionHandler: this.suggestionHandler,
+      }),
       getLinkDecorator({
         showOpenOptionOnHover: toolbar.link.showOpenOptionOnHover,
       }),
@@ -218,7 +244,7 @@ class WysiwygEditor extends Component {
           ...this.props.mention,
           onChange: this.onChange,
           getEditorState: this.getEditorState,
-          getSuggestions: this.getSuggestions,
+          getSuggestions: this.props.getMentionSuggestions || this.getSuggestions,
           getWrapperRef: this.getWrapperRef,
           modalHandler: this.modalHandler,
         })
@@ -366,8 +392,23 @@ class WysiwygEditor extends Component {
     return false;
   };
 
+  suggestionDropdownOpen = false;
+
+  suggestionHandler = {
+    open: () => {
+      this.suggestionDropdownOpen = true;
+    },
+  
+    close: () => {
+      this.suggestionDropdownOpen = false;
+    },
+  
+    isOpen: () => this.suggestionDropdownOpen,
+  };
+  
+
   handleReturn = event => {
-    if (SuggestionHandler.isOpen()) {
+    if (this.suggestionHandler.isOpen()) {
       return true;
     }
     const { editorState } = this.state;
@@ -478,7 +519,7 @@ class WysiwygEditor extends Component {
           onClick={this.focusEditor}
           onFocus={this.onEditorFocus}
           onBlur={this.onEditorBlur}
-          onKeyDown={KeyDownHandler.onKeyDown}
+          onKeyDown={this.keyDownHandler.onKeyDown}
           onMouseDown={this.onEditorMouseDown}
         >
           <Editor
@@ -545,7 +586,7 @@ WysiwygEditor.propTypes = {
   ariaHasPopup: PropTypes.string, // eslint-disable-line react/no-unused-prop-types
   customBlockRenderFunc: PropTypes.func,
   wrapperId: PropTypes.number,
-  customDecorators: PropTypes.array,
+  customDecorators: PropTypes.func,
   editorRef: PropTypes.func,
   handlePastedText: PropTypes.func,
 };
@@ -555,7 +596,7 @@ WysiwygEditor.defaultProps = {
   toolbarHidden: false,
   stripPastedStyles: false,
   localization: { locale: 'en', translations: {} },
-  customDecorators: [],
+  customDecorators: () => [],
 };
 
 export default WysiwygEditor;
