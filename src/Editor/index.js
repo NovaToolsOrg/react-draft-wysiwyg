@@ -234,9 +234,9 @@ class WysiwygEditor extends Component {
         keyDownCallBacks: this.keyDownCallBacks,
         suggestionHandler: this.suggestionHandler,
       }),
-      getLinkDecorator({
-        showOpenOptionOnHover: toolbar.link.showOpenOptionOnHover,
-      }),
+      // getLinkDecorator({
+      //   showOpenOptionOnHover: toolbar.link.showOpenOptionOnHover,
+      // }),
     ];
     if (this.props.mention) {
       decorators.push(
