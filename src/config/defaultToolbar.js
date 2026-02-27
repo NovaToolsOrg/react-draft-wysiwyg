@@ -1,28 +1,30 @@
-import bold from '../../images/bold.svg';
-import italic from '../../images/italic.svg';
-import underline from '../../images/underline.svg';
-import strikethrough from '../../images/strikethrough.svg';
-import monospace from '../../images/monospace.svg';
-import fontSize from '../../images/font-size.svg';
-import indent from '../../images/indent.svg';
-import outdent from '../../images/outdent.svg';
-import ordered from '../../images/list-ordered.svg';
-import unordered from '../../images/list-unordered.svg';
-import left from '../../images/align-left.svg';
-import center from '../../images/align-center.svg';
-import right from '../../images/align-right.svg';
-import justify from '../../images/align-justify.svg';
-import color from '../../images/color.svg';
-import eraser from '../../images/eraser.svg';
-import link from '../../images/link.svg';
-import unlink from '../../images/unlink.svg';
-import emoji from '../../images/emoji.svg';
-import embedded from '../../images/embedded.svg';
-import image from '../../images/image.svg';
-import undo from '../../images/undo.svg';
-import redo from '../../images/redo.svg';
-import subscript from '../../images/subscript.svg';
-import superscript from '../../images/superscript.svg';
+import {
+  Bold,
+  Italic,
+  Underline,
+  Strikethrough,
+  Code,
+  ALargeSmall,
+  IndentIncrease,
+  IndentDecrease,
+  ListOrdered,
+  List,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  Palette,
+  Eraser,
+  Link2,
+  Unlink,
+  Smile,
+  MonitorPlay,
+  ImagePlus,
+  Undo2,
+  Redo2,
+  Subscript,
+  Superscript,
+} from 'lucide-react';
 
 /**
 * This is default toolbar configuration,
@@ -58,17 +60,17 @@ export default {
       "superscript",
       "subscript"
     ],
-    bold: { icon: bold, className: undefined, title: undefined },
-    italic: { icon: italic, className: undefined, title: undefined },
-    underline: { icon: underline, className: undefined, title: undefined },
+    bold: { icon: Bold, className: undefined, title: undefined },
+    italic: { icon: Italic, className: undefined, title: undefined },
+    underline: { icon: Underline, className: undefined, title: undefined },
     strikethrough: {
-      icon: strikethrough,
+      icon: Strikethrough,
       className: undefined,
       title: undefined
     },
-    monospace: { icon: monospace, className: undefined, title: undefined },
-    superscript: { icon: superscript, className: undefined, title: undefined },
-    subscript: { icon: subscript, className: undefined, title: undefined }
+    monospace: { icon: Code, className: undefined, title: undefined },
+    superscript: { icon: Superscript, className: undefined, title: undefined },
+    subscript: { icon: Subscript, className: undefined, title: undefined }
   },
   blockType: {
     inDropdown: true,
@@ -89,7 +91,7 @@ export default {
     title: undefined
   },
   fontSize: {
-    icon: fontSize,
+    icon: ALargeSmall,
     options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36, 48, 60, 72, 96],
     className: undefined,
     component: undefined,
@@ -116,10 +118,10 @@ export default {
     component: undefined,
     dropdownClassName: undefined,
     options: ["unordered", "ordered", "indent", "outdent"],
-    unordered: { icon: unordered, className: undefined, title: undefined },
-    ordered: { icon: ordered, className: undefined, title: undefined },
-    indent: { icon: indent, className: undefined, title: undefined },
-    outdent: { icon: outdent, className: undefined, title: undefined },
+    unordered: { icon: List, className: undefined, title: undefined },
+    ordered: { icon: ListOrdered, className: undefined, title: undefined },
+    indent: { icon: IndentIncrease, className: undefined, title: undefined },
+    outdent: { icon: IndentDecrease, className: undefined, title: undefined },
     title: undefined
   },
   textAlign: {
@@ -128,14 +130,14 @@ export default {
     component: undefined,
     dropdownClassName: undefined,
     options: ["left", "center", "right", "justify"],
-    left: { icon: left, className: undefined, title: undefined },
-    center: { icon: center, className: undefined, title: undefined },
-    right: { icon: right, className: undefined, title: undefined },
-    justify: { icon: justify, className: undefined, title: undefined },
+    left: { icon: AlignLeft, className: undefined, title: undefined },
+    center: { icon: AlignCenter, className: undefined, title: undefined },
+    right: { icon: AlignRight, className: undefined, title: undefined },
+    justify: { icon: AlignJustify, className: undefined, title: undefined },
     title: undefined
   },
   colorPicker: {
-    icon: color,
+    icon: Palette,
     className: undefined,
     component: undefined,
     popupClassName: undefined,
@@ -179,12 +181,12 @@ export default {
     showOpenOptionOnHover: true,
     defaultTargetOption: "_self",
     options: ["link", "unlink"],
-    link: { icon: link, className: undefined, title: undefined },
-    unlink: { icon: unlink, className: undefined, title: undefined },
+    link: { icon: Link2, className: undefined, title: undefined },
+    unlink: { icon: Unlink, className: undefined, title: undefined },
     linkCallback: undefined
   },
   emoji: {
-    icon: emoji,
+    icon: Smile,
     className: undefined,
     component: undefined,
     popupClassName: undefined,
@@ -322,7 +324,7 @@ export default {
     title: undefined
   },
   embedded: {
-    icon: embedded,
+    icon: MonitorPlay,
     className: undefined,
     component: undefined,
     popupClassName: undefined,
@@ -334,7 +336,7 @@ export default {
     title: undefined
   },
   image: {
-    icon: image,
+    icon: ImagePlus,
     className: undefined,
     component: undefined,
     popupClassName: undefined,
@@ -352,7 +354,7 @@ export default {
     title: undefined
   },
   remove: {
-    icon: eraser,
+    icon: Eraser,
     className: undefined,
     component: undefined,
     title: undefined
@@ -363,8 +365,8 @@ export default {
     component: undefined,
     dropdownClassName: undefined,
     options: ["undo", "redo"],
-    undo: { icon: undo, className: undefined, title: undefined },
-    redo: { icon: redo, className: undefined, title: undefined },
+    undo: { icon: Undo2, className: undefined, title: undefined },
+    redo: { icon: Redo2, className: undefined, title: undefined },
     title: undefined
   }
 };

@@ -1,9 +1,9 @@
 .rdw-embedded-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   position: relative;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 .rdw-embedded-modal {
   position: absolute;
@@ -11,15 +11,15 @@
   left: 5px;
   display: flex;
   flex-direction: column;
-  width: 235px;
-  height: 180px;
-  border: 1px solid #F1F1F1;
-  padding: 15px;
-  border-radius: 2px;
+  width: 260px;
+  height: auto;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  border-radius: 12px;
   z-index: 100;
   background: white;
   justify-content: space-between;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .rdw-embedded-modal-header {
   font-size: 15px;
@@ -35,10 +35,11 @@
 }
 .rdw-embedded-modal-header-label {
   width: 95px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #e5e7eb;
   margin-top: 5px;
-  background: #6EB8D4;
-  border-bottom: 2px solid #0a66b7;
+  background: #eef2ff;
+  border-bottom: 2px solid #5170ff;
+  border-radius: 4px;
 }
 .rdw-embedded-modal-link-section {
   display: flex;
@@ -48,10 +49,11 @@
   width: 88%;
   height: 35px;
   margin: 10px 0;
-  border: 1px solid #F1F1F1;
-  border-radius: 2px;
-  font-size: 15px;
-  padding: 0 5px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 0 10px;
+  transition: border-color 0.15s ease;
 }
 .rdw-embedded-modal-link-input-wrapper {
   display: flex;
@@ -67,24 +69,31 @@
 .rdw-embedded-modal-btn {
   margin: 0 3px;
   width: 75px;
-  height: 30px;
-  border: 1px solid #F1F1F1;
-  border-radius: 2px;
+  height: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   cursor: pointer;
   background: white;
   text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.15s ease;
 }
 .rdw-embedded-modal-btn:hover {
-  box-shadow: 1px 1px 0px #BFBDBD;
+  background: #f1f5f9;
+  border-color: #d1d5db;
 }
 .rdw-embedded-modal-btn:active {
-  box-shadow: 1px 1px 0px #BFBDBD inset;
+  background: #e2e8f0;
 }
 .rdw-embedded-modal-btn:focus {
   outline: none !important;
 }
 .rdw-embedded-modal-btn:disabled {
-  background: #ece9e9;
+  background: #f1f5f9;
+  color: #94a3b8;
+  cursor: default;
 }
 .rdw-embedded-modal-size {
   align-items: center;

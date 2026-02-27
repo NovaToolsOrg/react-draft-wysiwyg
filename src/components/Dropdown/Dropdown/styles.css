@@ -1,22 +1,23 @@
 .rdw-dropdown-wrapper {
   height: 30px;
-  background: white;
+  background: transparent;
   cursor: pointer;
-  border: 1px solid #F1F1F1;
-  border-radius: 2px;
-  margin: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  margin: 0 1px;
   text-transform: capitalize;
-  background: white;
+  color: #64748b;
+  transition: all 0.15s ease;
 }
 .rdw-dropdown-wrapper:focus {
   outline: none;
 }
 .rdw-dropdown-wrapper:hover {
-  box-shadow: 1px 1px 0px #BFBDBD;
-  background-color: #FFFFFF;
+  background: #f1f5f9;
+  color: #1e293b;
 }
 .rdw-dropdown-wrapper:active {
-  box-shadow: 1px 1px 0px #BFBDBD inset;
+  background: #e2e8f0;
 }
 .rdw-dropdown-carettoopen {
   height: 0px;
@@ -24,9 +25,9 @@
   position: absolute;
   top: 35%;
   right: 10%;
-  border-top: 6px solid black;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
+  border-top: 5px solid #94a3b8;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
 }
 .rdw-dropdown-carettoclose {
   height: 0px;
@@ -34,9 +35,9 @@
   position: absolute;
   top: 35%;
   right: 10%;
-  border-bottom: 6px solid black;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
+  border-bottom: 5px solid #94a3b8;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
 }
 .rdw-dropdown-selectedtext {
   display: flex;
@@ -48,16 +49,16 @@
 .rdw-dropdown-optionwrapper {
   z-index: 100;
   position: relative;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #e5e7eb;
   width: 98%;
   background: white;
-  border-radius: 2px;
-  margin: 0;
-  padding: 0;
+  border-radius: 10px;
+  margin: 4px 0 0;
+  padding: 4px;
   max-height: 250px;
   overflow-y: scroll;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .rdw-dropdown-optionwrapper:hover {
-  box-shadow: 1px 1px 0px #BFBDBD;
   background-color: #FFFFFF;
 }

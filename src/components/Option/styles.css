@@ -1,27 +1,36 @@
 .rdw-option-wrapper {
-  border: 1px solid #F1F1F1;
-  padding: 5px;
-  min-width: 25px;
-  height: 20px;
-  border-radius: 2px;
-  margin: 0 4px;
+  border: 1px solid transparent;
+  padding: 6px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  margin: 0 1px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background: white;
+  background: transparent;
   text-transform: capitalize;
+  color: #64748b;
+  transition: all 0.15s ease;
 }
 .rdw-option-wrapper:hover {
-  box-shadow: 1px 1px 0px #BFBDBD;
+  background: #f1f5f9;
+  color: #1e293b;
 }
 .rdw-option-wrapper:active {
-  box-shadow: 1px 1px 0px #BFBDBD inset;
+  background: #e2e8f0;
 }
 .rdw-option-active {
-  box-shadow: 1px 1px 0px #BFBDBD inset;
+  background: #eef2ff;
+  color: #5170ff;
+  border-color: #c7d2fe;
 }
 .rdw-option-disabled {
   opacity: 0.3;
   cursor: default;
+}
+.rdw-option-wrapper svg {
+  width: 16px;
+  height: 16px;
 }

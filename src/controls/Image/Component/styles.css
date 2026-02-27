@@ -1,9 +1,9 @@
 .rdw-image-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 0;
   position: relative;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 .rdw-image-modal {
   position: absolute;
@@ -11,13 +11,13 @@
   left: 5px;
   display: flex;
   flex-direction: column;
-  width: 235px;
-  border: 1px solid #F1F1F1;
-  padding: 15px;
-  border-radius: 2px;
+  width: 260px;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  border-radius: 12px;
   z-index: 100;
   background: white;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .rdw-image-modal-header {
   font-size: 15px;
@@ -34,31 +34,35 @@
 }
 .rdw-image-modal-header-label {
   width: 80px;
-  background: #f1f1f1;
-  border: 1px solid #f1f1f1;
+  background: #f1f5f9;
+  border: 1px solid #e5e7eb;
   margin-top: 5px;
+  border-radius: 4px;
 }
 .rdw-image-modal-header-label-highlighted {
-  background: #6EB8D4;
-  border-bottom: 2px solid #0a66b7;
+  background: #eef2ff;
+  border-bottom: 2px solid #5170ff;
 }
 .rdw-image-modal-upload-option {
   width: 100%;
-  color: gray;
+  color: #64748b;
   cursor: pointer;
   display: flex;
   border: none;
-  font-size: 15px;
+  font-size: 14px;
   align-items: center;
   justify-content: center;
-  background-color: #f1f1f1;
-  outline: 2px dashed gray;
+  background-color: #f8fafc;
+  outline: 2px dashed #cbd5e1;
   outline-offset: -10px;
   margin: 10px 0;
   padding: 9px 0;
+  border-radius: 10px;
+  transition: all 0.15s ease;
 }
 .rdw-image-modal-upload-option-highlighted {
-  outline: 2px dashed #0a66b7;
+  outline: 2px dashed #5170ff;
+  background-color: #eef2ff;
 }
 .rdw-image-modal-upload-option-label {
   cursor: pointer;
@@ -92,10 +96,11 @@
   width: 90%;
   height: 35px;
   margin: 15px 0 12px;
-  border: 1px solid #F1F1F1;
-  border-radius: 2px;
-  font-size: 15px;
-  padding: 0 5px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 0 10px;
+  transition: border-color 0.15s ease;
 }
 .rdw-image-modal-btn-section {
   margin: 10px auto 0;
@@ -106,24 +111,31 @@
 .rdw-image-modal-btn {
   margin: 0 5px;
   width: 75px;
-  height: 30px;
-  border: 1px solid #F1F1F1;
-  border-radius: 2px;
+  height: 32px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
   cursor: pointer;
   background: white;
   text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  transition: all 0.15s ease;
 }
 .rdw-image-modal-btn:hover {
-  box-shadow: 1px 1px 0px #BFBDBD;
+  background: #f1f5f9;
+  border-color: #d1d5db;
 }
 .rdw-image-modal-btn:active {
-  box-shadow: 1px 1px 0px #BFBDBD inset;
+  background: #e2e8f0;
 }
 .rdw-image-modal-btn:focus {
   outline: none !important;
 }
 .rdw-image-modal-btn:disabled {
-  background: #ece9e9;
+  background: #f1f5f9;
+  color: #94a3b8;
+  cursor: default;
 }
 .rdw-image-modal-spinner {
   position: absolute;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { getFirstIcon } from '../../../utils/toolbar';
+import renderIcon from '../../../utils/renderIcon';
 import Option from '../../../components/Option';
 import { Dropdown, DropdownOption } from '../../../components/Dropdown';
 
@@ -39,11 +40,7 @@ export default class Inline extends Component {
                   (style === 'MONOSPACE' && currentState.CODE)
                 }
                 title={config[style].title || translations[`components.controls.inline.${style}`]}
-              >
-                <img
-                  alt=""
-                  src={config[style].icon}
-                />
+              >{renderIcon({ icon: config[style].icon })}
               </Option>),
             )
         }
@@ -75,10 +72,7 @@ export default class Inline extends Component {
         aria-label="rdw-inline-control"
         title={title}
       >
-        <img
-          src={getFirstIcon(config)}
-          alt=""
-        />
+        {renderIcon({ icon: getFirstIcon(config) })}
         {
           config.options
             .map((style, index) =>
@@ -92,10 +86,7 @@ export default class Inline extends Component {
                 }
                 title={config[style].title || translations[`components.controls.inline.${style}`]}
               >
-                <img
-                  src={config[style].icon}
-                  alt=""
-                />
+                {renderIcon({ icon: config[style].icon })}
               </DropdownOption>))
         }
       </Dropdown>

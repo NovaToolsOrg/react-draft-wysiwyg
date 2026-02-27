@@ -1,16 +1,23 @@
 .rdw-dropdownoption-default {
-  min-height: 25px;
+  min-height: 28px;
   display: flex;
   align-items: center;
-  padding: 0 5px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
 }
 .rdw-dropdownoption-highlighted {
-  background: #F1F1F1;
+  background: #f1f5f9;
 }
 .rdw-dropdownoption-active {
-  background: #f5f5f5;
+  background: #eef2ff;
+  color: #5170ff;
 }
 .rdw-dropdownoption-disabled {
   opacity: 0.3;
   cursor: default;
+}
+.rdw-dropdownoption-default svg {
+  width: 16px;
+  height: 16px;
 }

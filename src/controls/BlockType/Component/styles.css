@@ -1,8 +1,11 @@
 .rdw-block-wrapper {
   display: flex;
   align-items: center;
-  margin-bottom: 6px;
-  flex-wrap: wrap
+  margin-bottom: 0;
+  flex-wrap: wrap;
+  padding-right: 4px;
+  margin-right: 4px;
+  border-right: 1px solid #e5e7eb;
 }
 .rdw-block-dropdown {
   width: 110px;

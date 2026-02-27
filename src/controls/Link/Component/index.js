@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { stopPropagation } from '../../../utils/common';
 import { getFirstIcon } from '../../../utils/toolbar';
+import renderIcon from '../../../utils/renderIcon';
 import Option from '../../../components/Option';
 import { Dropdown, DropdownOption } from '../../../components/Dropdown';
 import './styles.css';
@@ -184,7 +185,7 @@ class LayoutComponent extends Component {
             aria-expanded={showModal}
             title={link.title || translations['components.controls.link.link']}
           >
-            <img src={link.icon} alt="" />
+            {renderIcon({ icon: link.icon })}
           </Option>
         )}
         {options.indexOf('unlink') >= 0 && (
@@ -197,7 +198,7 @@ class LayoutComponent extends Component {
               unlink.title || translations['components.controls.link.unlink']
             }
           >
-            <img src={unlink.icon} alt="" />
+            {renderIcon({ icon: unlink.icon })}
           </Option>
         )}
         {expanded && showModal ? this.renderAddLinkModal() : undefined}
@@ -242,7 +243,7 @@ class LayoutComponent extends Component {
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
         >
-          <img src={getFirstIcon(config)} alt="" />
+          {renderIcon({ icon: getFirstIcon(config) })}
           {options.indexOf('link') >= 0 && (
             <DropdownOption
               onClick={this.forceExpandAndShowModal}
@@ -251,7 +252,7 @@ class LayoutComponent extends Component {
                 link.title || translations['components.controls.link.link']
               }
             >
-              <img src={link.icon} alt="" />
+              {renderIcon({ icon: link.icon })}
             </DropdownOption>
           )}
           {options.indexOf('unlink') >= 0 && (
@@ -266,7 +267,7 @@ class LayoutComponent extends Component {
                 unlink.title || translations['components.controls.link.unlink']
               }
             >
-              <img src={unlink.icon} alt="" />
+              {renderIcon({ icon: unlink.icon })}
             </DropdownOption>
           )}
         </Dropdown>
